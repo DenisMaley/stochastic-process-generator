@@ -39,6 +39,19 @@ services:
         RABBIT_HOST: "rabbit"
         RABBIT_PORT: "5672"
 
+  print_service:
+    build:
+      context: print_service
+    depends_on:
+      - rabbit
+    environment:
+      REDIS_HOST: "redis"
+      REDIS_PORT: "6379"
+      RABBIT_PASSWORD: "guest"
+      RABBIT_USER: "guest"
+      RABBIT_HOST: "rabbit"
+      RABBIT_PORT: "5672"
+
 volumes:
   redis-data:
 

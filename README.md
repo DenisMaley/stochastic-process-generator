@@ -54,3 +54,29 @@ And to interract with a service inside nameko shell:
 ```shell script
 n.rpc.time_service.get_time_left()
 ```
+
+Launch the process manually:
+
+```shell script
+docker-compose exec parameter_service bash
+```
+
+```shell script
+nameko shell --config config.yml
+```
+
+And to interract with a service inside nameko shell:
+
+```shell script
+n.rpc.parameter_service.schedule_update_param()
+```
+
+Check the log of the process:
+
+```shell script
+docker-compose exec print_service bash
+```
+
+```shell script
+cat log.txt
+```
