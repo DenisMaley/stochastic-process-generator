@@ -42,7 +42,7 @@ docker-compose up -d
 ## To enter a service shell and nameko shell inside it
 
 ```shell script
-docker-compose exec parameter_service bash
+docker-compose exec time_service bash
 ```
 
 ```shell script
@@ -52,8 +52,5 @@ nameko shell --config config.yml
 And to interract with a service inside nameko shell:
 
 ```shell script
-n.rpc.parameter_service.get_param()
-```
-```shell script
-n.rpc.parameter_service.set_param(4)
+n.rpc.time_service.get_time_left()
 ```
