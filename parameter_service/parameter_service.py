@@ -16,6 +16,7 @@ class ParameterService:
 
     redis = Redis('development')
 
+    # TODO: subscribe to listen update_param
     @rpc
     def schedule_update_param(self) -> bool:
         r = np.random.uniform(0, 0.0002)
