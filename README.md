@@ -1,8 +1,7 @@
 ## Stochastic process generator
 
-The aim of this project is to build three simple components that interact with each other. 
-They should all run without manual intervention. 
-So, for example, you should also handle the scenario where one of the components breaks down.
+The aim of this project is to build the generation of stochastic process in microservices architecture.
+For the framework there was chosen [nameko][nameko].
 
 #### Time Server
 
@@ -80,3 +79,5 @@ docker-compose exec print_service bash
 ```shell script
 cat log.txt
 ```
+
+[nameko]: https://nameko.readthedocs.io/en/stable/
