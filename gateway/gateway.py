@@ -10,6 +10,6 @@ class GatewayService:
     parameter_service = RpcProxy('parameter_service')
 
     @http('GET', '/parameter')
-    def get_parameter(self):
+    def get_parameter(self, request):
         parameter = self.parameter_service.get_param()
         return json.dumps({'parameter': parameter})
