@@ -34,6 +34,7 @@ class ParameterService:
 
         return p
 
+    @rpc
     def get_param(self) -> float:
         param = self.redis.get(self.param_name) or self.init_param
         return float(param)
