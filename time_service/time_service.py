@@ -2,13 +2,17 @@ import datetime
 import threading
 
 from nameko.rpc import rpc, RpcProxy
+from nameko_redis import Redis
 
 
 class TimeService:
     name = "time_service"
+    timer_id_name = 'timer_id'
     day_coef = [1, 1, 1, 1, 1, .75, .5]
 
     parameter_service = RpcProxy('parameter_service')
+
+    redis = Redis('development')
 
     # TODO implement timezones (Now let's leave only UTC for simplicity)
     @staticmethod
@@ -64,6 +68,17 @@ class TimeService:
         period = days * (24 * 60 * 60) / self.day_coef[self.get_today().weekday()]
         timer = threading.Timer(period, callback, args, kwargs)
         timer.start()
+
+        self.set_timer_id(timer.ident)
+
+    @rpc
+    def get_timer_id(self):
+        timer_id = self.redis.get(self.timer_id_name)
+        return timer_id
+
+    def set_timer_id(self, timer_id):
+        self.redis.set(self.timer_id_name, timer_id)
+        return timer_id
 
     # TODO Investigate how to pass callback without wrapping them in time_service
     @rpc
