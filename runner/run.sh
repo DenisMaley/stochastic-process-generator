@@ -5,5 +5,5 @@ until nc -z ${RABBIT_HOST} ${RABBIT_PORT}; do
     sleep 1
 done
 
-python run.py
+python runner.py
 echo "$(date) - generating parameter process has started"
