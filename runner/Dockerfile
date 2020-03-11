@@ -8,7 +8,7 @@ COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY config.yml ./
-COPY run.py ./
+COPY runner.py ./
 COPY run.sh ./
 
 RUN chmod +x ./run.sh
