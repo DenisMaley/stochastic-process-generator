@@ -7,6 +7,8 @@ from nameko_redis import Redis
 class ParameterService:
     name = 'parameter_service'
 
+    process_triggered_name = 'process_triggered'
+
     param_name = 'p'
     init_param = 0
 
@@ -19,10 +21,13 @@ class ParameterService:
     # TODO: subscribe to listen update_param
     @rpc
     def schedule_update_param(self) -> bool:
-        r = np.random.uniform(0, 0.0002)
-        self.time_service.update_param_after(r)
+        process_triggered = bool(self.get_process_triggered())
 
-        return True
+        if process_triggered:
+            r = np.random.uniform(0, 0.0002)
+            self.time_service.update_param_after(r)
+
+        return process_triggered
 
     @rpc
     def update_param(self) -> float:
@@ -42,3 +47,12 @@ class ParameterService:
     def set_param(self, param_value: float) -> float:
         self.redis.set(self.param_name, param_value)
         return param_value
+
+    def get_process_triggered(self) -> int:
+        process_triggered = self.redis.get(self.process_triggered_name)
+        return int(process_triggered)
+
+    @rpc
+    def set_process_triggered(self, process_triggered: int) -> int:
+        self.redis.set(self.process_triggered_name, process_triggered)
+        return process_triggered
