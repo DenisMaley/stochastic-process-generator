@@ -56,3 +56,12 @@ class ParameterService:
     def set_process_triggered(self, process_triggered: int) -> int:
         self.redis.set(self.process_triggered_name, process_triggered)
         return process_triggered
+
+    @rpc
+    def start_process(self):
+        self.set_process_triggered(1)
+        self.schedule_update_param()
+
+    @rpc
+    def stop_process(self):
+        self.set_process_triggered(0)
