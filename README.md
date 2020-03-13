@@ -38,10 +38,17 @@ has passed since the last print.
 docker-compose up -d
 ```
 
-## To make a request to Gateway API
+## To make a request to Gateway API for the parameter
 
 ```shell script
 curl localhost:8000/parameter
+```
+
+## To make a request to Gateway API for the stopping/launching the process
+
+```shell script
+curl -i -d '{"trigger": 0}' localhost:8000/process
+curl -i -d '{"trigger": 1}' localhost:8000/process
 ```
 
 ## To enter a service shell and nameko shell inside it
